@@ -7,69 +7,96 @@ export function ProgressProvider({ children }) {
   const [lessons, setLessons] = useState([]);
   const [currentLesson, setCurrentLesson] = useState(null);
   const [exercises, setExercises] = useState([]);
-  const [user, setUser] = useState(dataService.getUserData());
+  const [user, setUser] = useState(() => {
+    try {
+      return dataService.getUserData();
+    } catch (error) {
+      console.error('Failed to load user data:', error);
+      return { total_xp: 0, current_level: 1, current_streak: 0, longest_streak: 0, last_practice_date: null };
+    }
+  });
 
   const loadLessons = async () => {
-    return new Promise(resolve => {
+    try {
       const data = dataService.getAllLessons();
       setLessons(data);
-      resolve(data);
-    });
+      return data;
+    } catch (error) {
+      console.error('Failed to load lessons:', error);
+      throw error;
+    }
   };
 
   const loadLesson = async (lessonId) => {
-    return new Promise(resolve => {
+    try {
       const data = dataService.getLessonById(lessonId);
       setCurrentLesson(data);
-      resolve(data);
-    });
+      return data;
+    } catch (error) {
+      console.error('Failed to load lesson:', lessonId, error);
+      throw error;
+    }
   };
 
   const loadExercises = async (lessonId) => {
-    return new Promise(resolve => {
+    try {
       const data = dataService.getLessonExercises(lessonId);
       setExercises(data);
-      resolve(data);
-    });
+      return data;
+    } catch (error) {
+      console.error('Failed to load exercises:', lessonId, error);
+      throw error;
+    }
   };
 
   const startLesson = async (lessonId) => {
-    return new Promise(resolve => {
+    try {
       const result = dataService.startLesson(lessonId);
       setUser(dataService.getUserData());
-      resolve(result);
-    });
+      return result;
+    } catch (error) {
+      console.error('Failed to start lesson:', lessonId, error);
+      throw error;
+    }
   };
 
   const submitExercise = async (exerciseId, answer, attemptCount) => {
-    return new Promise(resolve => {
+    try {
       const result = dataService.submitExercise(exerciseId, answer, attemptCount);
 
       if (result.newTotalXp !== undefined) {
         setUser(dataService.getUserData());
       }
 
-      resolve(result);
-    });
+      return result;
+    } catch (error) {
+      console.error('Failed to submit exercise:', exerciseId, error);
+      throw error;
+    }
   };
 
   const completeLesson = async (lessonId) => {
-    return new Promise(resolve => {
+    try {
       const result = dataService.completeLesson(lessonId);
 
       if (result.newTotalXp !== undefined) {
         setUser(dataService.getUserData());
       }
 
-      resolve(result);
-    });
+      return result;
+    } catch (error) {
+      console.error('Failed to complete lesson:', lessonId, error);
+      throw error;
+    }
   };
 
   const loadUserStats = async () => {
-    return new Promise(resolve => {
+    try {
       setUser(dataService.getUserData());
-      resolve();
-    });
+    } catch (error) {
+      console.error('Failed to load user stats:', error);
+      throw error;
+    }
   };
 
   return (
