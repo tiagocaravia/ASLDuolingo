@@ -8,7 +8,7 @@ function Matching({ exercise, onSubmit, attempts }) {
     setMatches({});
   }, [exercise.id]);
 
-  const pairs = exercise.options ? JSON.parse(exercise.options) : [];
+  const pairs = exercise.options || [];
 
   const handleMatch = (imageUrl, answer) => {
     setMatches(prev => ({ ...prev, [imageUrl]: answer }));

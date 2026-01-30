@@ -5,7 +5,7 @@ function SignRecognition({ exercise, onSubmit, attempts }) {
   const [selected, setSelected] = useState('');
 
   const shuffledOptions = useMemo(() => {
-    const options = exercise.options ? JSON.parse(exercise.options) : [];
+    const options = exercise.options || [];
     const shuffled = [...options];
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
