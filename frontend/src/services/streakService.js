@@ -1,4 +1,4 @@
-import constantsData from '../data/constants.json';
+import constantsData from '../data/constants.js';
 import { addXp } from './xpService';
 
 const { xpValues } = constantsData;

@@ -1,7 +1,7 @@
-import lessonsData from '../data/lessons.json';
-import exercisesData from '../data/exercises.json';
-import achievementsData from '../data/achievements.json';
-import constantsData from '../data/constants.json';
+import lessonsData from '../data/lessons.js';
+import exercisesData from '../data/exercises.js';
+import achievementsData from '../data/achievements.js';
+import constantsData from '../data/constants.js';
 import { addXp } from './xpService';
 import { updateStreak } from './streakService';
 import { checkAndAwardAchievements } from './achievementService';

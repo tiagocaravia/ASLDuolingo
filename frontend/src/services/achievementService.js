@@ -1,4 +1,4 @@
-import lessonsData from '../data/lessons.json';
+import lessonsData from '../data/lessons.js';
 
 export function checkAndAwardAchievements(userData, progressData, earnedAchievements, allAchievements) {
   const earnedIds = Object.keys(earnedAchievements);
