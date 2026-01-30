@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import './Exercise.css';
+import { getAssetPath } from '../../utils/assetPath';
 
 function SignRecognition({ exercise, onSubmit, attempts }) {
   const [selected, setSelected] = useState('');
@@ -35,7 +36,7 @@ function SignRecognition({ exercise, onSubmit, attempts }) {
             className={`image-option ${selected === option.image_url ? 'selected' : ''}`}
             onClick={() => setSelected(option.image_url)}
           >
-            <img src={option.image_url} alt={`Option ${index + 1}`} />
+            <img src={getAssetPath(option.image_url)} alt={`Option ${index + 1}`} />
           </div>
         ))}
       </div>

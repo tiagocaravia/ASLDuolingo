@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './Exercise.css';
+import { getAssetPath } from '../../utils/assetPath';
 
 function Matching({ exercise, onSubmit, attempts }) {
   const [matches, setMatches] = useState({});
@@ -29,7 +30,7 @@ function Matching({ exercise, onSubmit, attempts }) {
       <div className="matching-pairs">
         {pairs.map((pair, index) => (
           <div key={index} className="matching-pair">
-            <img src={pair.image_url} alt={`Sign ${index + 1}`} />
+            <img src={getAssetPath(pair.image_url)} alt={`Sign ${index + 1}`} />
             <select
               value={matches[pair.image_url] || ''}
               onChange={(e) => handleMatch(pair.image_url, e.target.value)}

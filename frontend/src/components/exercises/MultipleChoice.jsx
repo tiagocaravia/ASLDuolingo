@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import './Exercise.css';
+import { getAssetPath } from '../../utils/assetPath';
 
 function MultipleChoice({ exercise, onSubmit, attempts }) {
   const [selected, setSelected] = useState('');
@@ -30,7 +31,7 @@ function MultipleChoice({ exercise, onSubmit, attempts }) {
 
       {exercise.image_url && (
         <div className="exercise-image">
-          <img src={exercise.image_url} alt="ASL sign" />
+          <img src={getAssetPath(exercise.image_url)} alt="ASL sign" />
         </div>
       )}
 
